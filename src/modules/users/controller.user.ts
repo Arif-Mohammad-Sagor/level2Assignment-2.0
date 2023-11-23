@@ -67,6 +67,7 @@ const updateUser = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       success: false,
       message: 'something went wrong',
