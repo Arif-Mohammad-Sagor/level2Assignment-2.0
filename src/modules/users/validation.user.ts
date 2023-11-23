@@ -18,7 +18,6 @@ const userValidationSchema = z.object({
     city: z.string(),
     country: z.string(),
   }),
-  // orders: z.array(orderValidation),
 });
 
 export default userValidationSchema;
