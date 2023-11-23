@@ -1,5 +1,5 @@
-import mongoose, { Schema, model } from 'mongoose';
-import { IAddress, IName, IOrders, IUser } from './interfece.user';
+import { Schema, model } from 'mongoose';
+import { IAddress, IName, IUser } from './interfece.user';
 
 const userNameSchema = new Schema<IName>({
   firstName: { type: String, required: true },
@@ -11,11 +11,11 @@ const userAddressSchema = new Schema<IAddress>({
   country: { type: String, required: true },
 });
 
-const userOrdersSchema = new Schema<IOrders>({
-  productName: { type: String, required: true },
-  price: { type: Number, required: true },
-  quantity: { type: Number, required: true },
-});
+// const userOrdersSchema = new Schema<IOrders>({
+//   productName: { type: String, required: true },
+//   price: { type: Number, required: true },
+//   quantity: { type: Number, required: true },
+// });
 
 const userSchema = new Schema<IUser>({
   userId: { type: Number, required: true, unique: true },
@@ -24,10 +24,10 @@ const userSchema = new Schema<IUser>({
   fullname: userNameSchema,
   age: { type: Number, required: true },
   email: { type: String, required: true },
-  isActive: { type: Boolean, required: true },
+  isActive: { type: Boolean, required: true, default: true },
   hobbies: [{ type: String }],
-  address:userAddressSchema,
-  orders:userOrdersSchema
+  address: userAddressSchema,
+  // orders: userOrdersSchema,
 });
 const userModel = model<IUser>('users', userSchema);
 export default userModel;
