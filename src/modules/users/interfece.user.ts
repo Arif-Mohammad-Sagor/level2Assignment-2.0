@@ -1,14 +1,14 @@
-interface IName {
+export interface IName {
   firstName: string;
   lastName: string;
 }
-interface IAddress {
+export interface IAddress {
   street: string;
   city: string;
   country: string;
 }
 
-interface IOrders {
+export interface IOrders {
   productName: string;
   price: number;
   quantity: number;
