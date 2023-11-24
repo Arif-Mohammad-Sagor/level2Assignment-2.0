@@ -6,7 +6,7 @@ const handleAllRequests = (req: Request, res: Response) => {
   });
 };
 const errorHandler = (
-  error:any,
+  error: any,
   req: Request,
   res: Response,
   next: NextFunction,

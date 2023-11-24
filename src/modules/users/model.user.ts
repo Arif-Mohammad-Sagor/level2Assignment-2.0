@@ -1,10 +1,10 @@
-import { Query, Schema, model } from 'mongoose';
+import { Model, Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import { IUser } from './interfece.user';
 import config from '../../config';
 
 const userSchema = new Schema<IUser>({
-  userId: { type: Number, required: true, unique: true },
+  userId: { type: String, required: true, unique: true },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   fullname: {
@@ -28,11 +28,21 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-userSchema.methods.toJSON = function () {// removing  password
+userSchema.methods.toJSON = function () {
+  // removing  password
   const userObject = this.toObject();
   delete userObject.password;
   return userObject;
 };
 
-const userModel = model<IUser>('users', userSchema);
+export interface IUserModel extends Model<IUser> {
+  isUserExists(userId: string): Promise<boolean>;
+}
+
+userSchema.statics.isUserExists = async function (id: string) {
+  const existingUser = await this.findOne({ userId: id });
+  return existingUser;
+};
+
+const userModel = model<IUser, IUserModel>('users', userSchema);
 export default userModel;

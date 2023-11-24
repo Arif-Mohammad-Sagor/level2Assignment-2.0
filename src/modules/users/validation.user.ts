@@ -1,8 +1,7 @@
 import z from 'zod';
 
-
 const userValidationSchema = z.object({
-  userId: z.number(),
+  userId: z.string(),
   username: z.string(),
   password: z.string(),
   fullname: z.object({

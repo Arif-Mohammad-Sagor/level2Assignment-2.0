@@ -7,11 +7,7 @@ const createUser = async (req: Request, res: Response) => {
     const user = req.body;
     const zodvalidatedUser = userValidationSchema.parse(user);
     const result = await servicesUser.createUser(zodvalidatedUser);
-    res.status(200).json({
-      success: true,
-      message: 'User created successfully',
-      data: result,
-    });
+    res.status(201).json(result);
   } catch (error) {
     res.status(400).json({
       success: false,
@@ -24,7 +20,7 @@ const createUser = async (req: Request, res: Response) => {
 const getallUser = async (req: Request, res: Response) => {
   try {
     const result = await servicesUser.getAllUser();
-    res.status(200).json({
+    res.status(201).json({
       success: true,
       message: 'fetched users successfully',
       data: result,
@@ -42,11 +38,7 @@ const getSingleUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const result = await servicesUser.getSingleUser(userId);
-    res.status(200).json({
-      success: true,
-      message: 'fetched single user successfully',
-      data: result,
-    });
+    res.status(201).json(result);
   } catch (error) {
     res.status(400).json({
       success: false,
@@ -59,15 +51,12 @@ const updateUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const updatedUserInfo = req.body;
+
     const zodvalidatedUser = userValidationSchema.parse(updatedUserInfo);
     const result = await servicesUser.updateUser(userId, zodvalidatedUser);
-    res.status(200).json({
-      success: true,
-      message: 'update user successfully',
-      data: result,
-    });
+
+    res.status(201).json(result);
   } catch (error) {
-    console.log(error);
     res.status(400).json({
       success: false,
       message: 'something went wrong',
@@ -80,11 +69,7 @@ const deleteUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const result = await servicesUser.deleteUser(userId);
-    res.status(200).json({
-      success: true,
-      message: 'deleted a user successfully',
-      data: result,
-    });
+    res.status(201).json(result);
   } catch (error) {
     res.status(400).json({
       success: false,
