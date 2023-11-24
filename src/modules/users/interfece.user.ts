@@ -1,3 +1,8 @@
+interface IOrders {
+  productName:string,
+  price:number,
+  quantity:number,
+}
 export interface IUser {
   userId: string;
   username: string;
@@ -15,4 +20,5 @@ export interface IUser {
     city: string;
     country: string;
   };
+  orders?:IOrders[]
 }

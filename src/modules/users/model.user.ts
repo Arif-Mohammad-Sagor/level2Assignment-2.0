@@ -20,6 +20,11 @@ const userSchema = new Schema<IUser>({
     city: { type: String, required: true },
     country: { type: String, required: true },
   },
+  orders: [{ 
+    productName: { type: String },
+    price:{type:Number},
+    quantity:{type:Number}
+  }],
 });
 
 userSchema.pre('save', async function (next) {

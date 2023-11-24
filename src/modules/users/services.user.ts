@@ -79,7 +79,7 @@ const deleteUser = async (params: string) => {
     };
   }
   let result = await userModel.findOneAndDelete({ userId: params });
-  // result = null;
+
   return {
     success: true,
     message: 'User deleted successfully',
