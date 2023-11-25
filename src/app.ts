@@ -16,9 +16,4 @@ app.get('/', (req, res) => {
   res.send('Hello world');
 });
 
-// app.all('*', globalError.handleAllRequests); //all wrong route handling
-// app.use((error,req,res,next) => {
-//   globalError.errorHandler(error,req, res, next);
-// });
-
 export default app;

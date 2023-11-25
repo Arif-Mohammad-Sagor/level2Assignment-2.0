@@ -1,6 +1,6 @@
 import userModel from '../users/model.user';
 
-const makeOrders = async (userId: string, orderInfo: object) => {
+const makeOrders = async (userId: number, orderInfo: object) => {
   const user = await userModel.isUserExists(userId);
   if (!user) {
     return {
@@ -25,9 +25,7 @@ const makeOrders = async (userId: string, orderInfo: object) => {
   };
 };
 
-
-
-const getOrders = async (userId: string) => {
+const getOrders = async (userId: number) => {
   const user = await userModel.isUserExists(userId);
   if (!user) {
     return {
@@ -39,15 +37,15 @@ const getOrders = async (userId: string) => {
       },
     };
   }
-  const result = userModel.findOne({ userId }).projection({ Orders: 1 });
+  const result = await userModel.findOne({ userId }).select('orders');
   return {
     success: true,
-    message: 'Order fetched Successfully',
+    message: 'Orders Fetch successfully',
     data: result,
   };
 };
 
-const getTotalPrice = async (userId: string) => {
+const getTotalPrice = async (userId: number) => {
   const user = await userModel.isUserExists(userId);
 
   if (!user) {
@@ -61,7 +59,20 @@ const getTotalPrice = async (userId: string) => {
     };
   }
 
-  const result = userModel.find();
+  const result = await userModel.aggregate([
+    {
+      $match: { userId: userId },
+    },
+    {
+      $unwind: '$orders',
+    },
+    {
+      $group: {
+        _id: null,
+        totalPrice: { $sum: '$orders.price' },
+      },
+    },
+  ]);
 
   return {
     success: true,

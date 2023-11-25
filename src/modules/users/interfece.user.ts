@@ -4,7 +4,7 @@ interface IOrders {
   quantity:number,
 }
 export interface IUser {
-  userId: string;
+  userId: number;
   username: string;
   password: string;
   fullname: {

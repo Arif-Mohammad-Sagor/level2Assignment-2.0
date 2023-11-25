@@ -13,7 +13,8 @@ exports.orderControllers = void 0;
 const orders_services_1 = require("./orders.services");
 const makeOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userId } = req.params;
+        const id = req.params.userId;
+        const userId = parseInt(id);
         const orderInfo = req.body;
         const result = yield orders_services_1.ordersServices.makeOrders(userId, orderInfo);
         res.status(201).json(result);
@@ -28,7 +29,8 @@ const makeOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 const getOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userId } = req.params;
+        const id = req.params.userId;
+        const userId = parseInt(id);
         const result = yield orders_services_1.ordersServices.getOrders(userId);
         res.status(201).json(result);
     }
@@ -43,7 +45,8 @@ const getOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const getTotalPrice = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userId } = req.params;
+        const id = req.params.userId;
+        const userId = parseInt(id);
         const result = yield orders_services_1.ordersServices.getTotalPrice(userId);
         res.status(201).json(result);
     }

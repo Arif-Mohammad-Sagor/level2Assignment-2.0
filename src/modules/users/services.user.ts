@@ -24,7 +24,7 @@ const getAllUser = async () => {
   const result = await userModel.find();
   return result;
 };
-const getSingleUser = async (userId: string) => {
+const getSingleUser = async (userId: number) => {
   const user = await userModel.isUserExists(userId);
   if (!user) {
     return {
@@ -43,7 +43,7 @@ const getSingleUser = async (userId: string) => {
     data: result,
   };
 };
-const updateUser = async (params: string, userInfo: IUser) => {
+const updateUser = async (params: number, userInfo: IUser) => {
   const user = await userModel.isUserExists(params);
   if (!user) {
     return {
@@ -66,7 +66,7 @@ const updateUser = async (params: string, userInfo: IUser) => {
     data: result,
   };
 };
-const deleteUser = async (params: string) => {
+const deleteUser = async (params:number) => {
   const user = await userModel.isUserExists(params);
   if (!user) {
     return {

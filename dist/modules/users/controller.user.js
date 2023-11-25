@@ -48,7 +48,8 @@ const getallUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userId } = req.params;
+        const id = req.params.userId;
+        const userId = parseInt(id);
         const result = yield services_user_1.default.getSingleUser(userId);
         res.status(201).json(result);
     }
@@ -62,7 +63,8 @@ const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 });
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userId } = req.params;
+        const id = req.params.userId;
+        const userId = parseInt(id);
         const updatedUserInfo = req.body;
         const zodvalidatedUser = validation_user_1.default.parse(updatedUserInfo);
         const result = yield services_user_1.default.updateUser(userId, zodvalidatedUser);
@@ -78,7 +80,8 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userId } = req.params;
+        const id = req.params.userId;
+        const userId = parseInt(id);
         const result = yield services_user_1.default.deleteUser(userId);
         res.status(201).json(result);
     }

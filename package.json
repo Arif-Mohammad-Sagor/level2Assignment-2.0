@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node./dist/server.js",
-    "build": "tsc",
+    "start": "nodemon ./dist/server.js",
+    "build": "tsc --watch",
     "lint": "eslint --ignore-path .eslintignore --ext .ts",
     "lint:fix": "npx eslint src --fix",
     "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",

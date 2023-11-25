@@ -16,8 +16,4 @@ app.use(orders_router_1.orderRoutes.router);
 app.get('/', (req, res) => {
     res.send('Hello world');
 });
-// app.all('*', globalError.handleAllRequests); //all wrong route handling
-// app.use((error,req,res,next) => {
-//   globalError.errorHandler(error,req, res, next);
-// });
 exports.default = app;

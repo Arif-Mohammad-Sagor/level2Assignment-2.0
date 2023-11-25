@@ -45,10 +45,10 @@ const getOrders = (userId) => __awaiter(void 0, void 0, void 0, function* () {
             },
         };
     }
-    const result = model_user_1.default.findOne({ userId }).projection({ Orders: 1 });
+    const result = yield model_user_1.default.findOne({ userId }).select('orders');
     return {
         success: true,
-        message: 'Order fetched Successfully',
+        message: 'Orders Fetch successfully',
         data: result,
     };
 });
@@ -64,7 +64,20 @@ const getTotalPrice = (userId) => __awaiter(void 0, void 0, void 0, function* ()
             },
         };
     }
-    const result = model_user_1.default.find();
+    const result = yield model_user_1.default.aggregate([
+        {
+            $match: { userId: userId },
+        },
+        {
+            $unwind: '$orders',
+        },
+        {
+            $group: {
+                _id: null,
+                totalPrice: { $sum: '$orders.price' },
+            },
+        },
+    ]);
     return {
         success: true,
         message: 'Total price calculated successfully!',

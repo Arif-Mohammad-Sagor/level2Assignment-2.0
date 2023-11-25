@@ -4,8 +4,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const zod_1 = __importDefault(require("zod"));
+const orderOjbect = zod_1.default.object({
+    productName: zod_1.default.string(),
+    price: zod_1.default.number(),
+    quantity: zod_1.default.number(),
+});
 const userValidationSchema = zod_1.default.object({
-    userId: zod_1.default.string(),
+    userId: zod_1.default.number(),
     username: zod_1.default.string(),
     password: zod_1.default.string(),
     fullname: zod_1.default.object({
@@ -21,10 +26,6 @@ const userValidationSchema = zod_1.default.object({
         city: zod_1.default.string(),
         country: zod_1.default.string(),
     }),
-    orders: zod_1.default.array(zod_1.default.object({
-        productName: zod_1.default.string(),
-        price: zod_1.default.number(),
-        quantity: zod_1.default.number()
-    }))
+    orders: zod_1.default.array(orderOjbect).optional()
 });
 exports.default = userValidationSchema;

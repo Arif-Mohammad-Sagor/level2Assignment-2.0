@@ -36,7 +36,8 @@ const getallUser = async (req: Request, res: Response) => {
 
 const getSingleUser = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    const id = req.params.userId;
+    const userId = parseInt(id);
     const result = await servicesUser.getSingleUser(userId);
     res.status(201).json(result);
   } catch (error) {
@@ -49,7 +50,8 @@ const getSingleUser = async (req: Request, res: Response) => {
 };
 const updateUser = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    const id = req.params.userId;
+    const userId = parseInt(id);
     const updatedUserInfo = req.body;
 
     const zodvalidatedUser = userValidationSchema.parse(updatedUserInfo);
@@ -67,7 +69,8 @@ const updateUser = async (req: Request, res: Response) => {
 
 const deleteUser = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
+    const id = req.params.userId;
+    const userId = parseInt(id);
     const result = await servicesUser.deleteUser(userId);
     res.status(201).json(result);
   } catch (error) {

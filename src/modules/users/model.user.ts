@@ -5,7 +5,7 @@ import config from '../../config';
 import { IUser } from './interfece.user';
 
 const userSchema = new Schema<IUser>({
-  userId: { type: String, required: true, unique: true },
+  userId: { type: Number, required: true, unique: true },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   fullname: {
@@ -42,10 +42,10 @@ userSchema.methods.toJSON = function () {
 };
 
 export interface IUserModel extends Model<IUser> {
-  isUserExists(userId: string): Promise<boolean>;
+  isUserExists(userId: number): Promise<boolean>;
 }
 
-userSchema.statics.isUserExists = async function (id: string) {
+userSchema.statics.isUserExists = async function (id: number) {
   const existingUser = await this.findOne({ userId: id });
   return existingUser;
 };
