@@ -1,7 +1,8 @@
-import { Model, Schema, model } from 'mongoose';
+import { Model, Query, Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
-import { IUser } from './interfece.user';
+
 import config from '../../config';
+import { IUser } from './interfece.user';
 
 const userSchema = new Schema<IUser>({
   userId: { type: String, required: true, unique: true },
